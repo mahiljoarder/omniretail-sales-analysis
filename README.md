@@ -47,7 +47,7 @@ The raw data (`Sales_Data_Messy.xlsx`) had several issues:
 
 ### Stage 2 — SQL Cleaning
 After loading into PostgreSQL, a further issue was found:
-- ❌ `Sale_Date` stored as Excel serial numbers (e.g. `45394` instead of a real date)
+- `Sale_Date` stored as Excel serial numbers (e.g. `45394` instead of a real date)
 
 **Fix:** Added a new `date_converted` column and converted using:
 ```sql
