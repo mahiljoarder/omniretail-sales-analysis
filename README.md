@@ -40,8 +40,8 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 
 ### Stage 1 — Excel Cleaning
 The raw data (`Sales_Data_Messy.xlsx`) had several issues:
-- ❌ Data stored in rows instead of columns (transposed layout)
-- ❌ Fields not properly structured for database import
+-  Data stored in rows instead of columns (transposed layout)
+- Fields not properly structured for database import
 
 **Fix:** Restructured the entire dataset into proper tabular format where each row represents one transaction with 12 columns.
 
