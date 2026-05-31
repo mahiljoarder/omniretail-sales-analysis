@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniRetail — Sales Performance Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --ink: #0f0e0d;
+  --ink-2: #3a3834;
+  --ink-3: #6b6860;
+  --rule: #e0ddd8;
+  --bg: #faf9f7;
+  --bg-2: #f2f0ec;
+  --accent: #1a3a5c;
+  --accent-warm: #8b3a2a;
+  --gold: #c9a84c;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* COVER */
+.cover {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.cover-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cover-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.cover-eyebrow::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+}
+.cover h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.cover h1 em { font-style: italic; color: var(--accent); }
+.cover-desc {
+  font-size: 1rem;
+  color: var(--ink-2);
+  max-width: 480px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.cover-meta {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--ink-3);
+  line-height: 2;
+}
+.cover-meta strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--ink);
+  display: block;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0;
+}
+.cover-kpis { display: flex; gap: 3rem; }
+.cover-kpi { text-align: right; }
+.cover-kpi .val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.cover-kpi .lbl {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+/* PAGE */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.page-header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.page-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--rule);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+.page-title em { font-style: italic; color: var(--accent); }
+
+/* METRIC GRID */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 3rem;
+}
+.metric {
+  background: var(--bg);
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+.metric::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.3s;
+}
+.metric:hover::before { background: var(--gold); }
+.metric .m-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.metric .m-lbl {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.metric .m-sub { font-size: 0.8rem; color: var(--ink-3); }
+
+/* FINDING ROWS */
+.findings { display: flex; flex-direction: column; gap: 0; }
+.finding {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.finding:last-child { border-bottom: none; }
+.finding-q {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+.finding-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.finding-answer { text-align: right; }
+.finding-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.finding-sub { font-size: 0.8rem; color: var(--ink-3); }
+
+/* BAR CHART */
+.bar-chart { margin: 2.5rem 0; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.bar-label { font-size: 0.82rem; color: var(--ink-2); }
+.bar-track { background: var(--bg-2); height: 8px; border-radius: 0; }
+.bar-fill { height: 100%; background: var(--accent); border-radius: 0; }
+.bar-fill.warm { background: var(--accent-warm); }
+.bar-fill.gold { background: var(--gold); }
+.bar-val { font-size: 0.82rem; color: var(--ink-2); text-align: right; font-family: 'JetBrains Mono', monospace; }
+
+/* INSIGHT CARDS */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.insight-card {
+  padding: 1.75rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  background: var(--bg);
+  transition: border-color 0.2s;
+}
+.insight-card.warn { border-left-color: var(--accent-warm); }
+.insight-card.gold { border-left-color: var(--gold); }
+.insight-card:hover { border-color: var(--ink-3); border-left-color: inherit; }
+.insight-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.75rem;
+}
+.insight-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.insight-card p { font-size: 0.85rem; color: var(--ink-2); line-height: 1.6; }
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  font-style: italic;
+}
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+/* BACK COVER */
+.back-cover {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem;
+  border-top: 1px solid var(--rule);
+}
+.back-cover h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.back-cover .github-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-3);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.back-cover .github-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .cover, .page { padding: 2.5rem 2rem; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .finding { grid-template-columns: 1fr; gap: 0.5rem; }
+  .finding-answer { text-align: left; }
+  .two-col { grid-template-columns: 1fr; gap: 2rem; }
+  .insight-grid { grid-template-columns: 1fr; }
+  .cover-kpis { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-eyebrow">Sales Performance Report</div>
+    <h1>OmniRetail<br><em>Sales Analysis</em></h1>
+    <p class="cover-desc">A comprehensive analysis of revenue performance, customer behavior, product trends, and store efficiency across four regions and ten stores.</p>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <strong>Mahil Joarder</strong>
+      Data Analyst<br>
+      SQL &nbsp;·&nbsp; Excel &nbsp;·&nbsp; Power BI
+    </div>
+    <div class="cover-kpis">
+      <div class="cover-kpi">
+        <span class="val">$602K</span>
+        <span class="lbl">Total Revenue</span>
+      </div>
+      <div class="cover-kpi">
+        <span class="val">500</span>
+        <span class="lbl">Transactions</span>
+      </div>
+      <div class="cover-kpi">
+        <span class="val">10</span>
+        <span class="lbl">Stores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 1 — OVERVIEW -->
+<section class="page">
+  <div class="page-header">
+    <span class="page-num">01</span>
+    <h2 class="page-title">Business <em>Overview</em></h2>
+  </div>
+  <div class="metric-grid">
+    <div class="metric">
+      <span class="m-lbl">Total Revenue</span>
+      <span class="m-val">$602.6K</span>
+      <span class="m-sub">Across all regions & stores</span>
+    </div>
+    <div class="metric">
+      <span class="m-lbl">Total Transactions</span>
+      <span class="m-val">500</span>
+      <span class="m-sub">Jan – Dec 2024</span>
+    </div>
+    <div class="metric">
+      <span class="m-lbl">Units Sold</span>
+      <span class="m-val">2,000</span>
+      <span class="m-sub">Across 50 products</span>
+    </div>
+    <div class="metric">
+      <span class="m-lbl">Overall Return Rate</span>
+      <span class="m-val">9.8%</span>
+      <span class="m-sub">Across all categories</span>
+    </div>
+  </div>
+  <div class="two-col">
+    <div>
+      <p class="section-title">Revenue by region</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">West</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <span class="bar-val">$178.7K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">North</span>
+          <div class="bar-track"><div class="bar-fill" style="width:86%"></div></div>
+          <span class="bar-val">$154.8K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">South</span>
+          <div class="bar-track"><div class="bar-fill" style="width:81%"></div></div>
+          <span class="bar-val">$145.6K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">East</span>
+          <div class="bar-track"><div class="bar-fill" style="width:69%"></div></div>
+          <span class="bar-val">$123.5K</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-title">Revenue by quarter</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Q1 (Jan–Mar)</span>
+          <div class="bar-track"><div class="bar-fill gold" style="width:77%"></div></div>
+          <span class="bar-val">$124.0K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Q2 (Apr–Jun)</span>
+          <div class="bar-track"><div class="bar-fill gold" style="width:99%"></div></div>
+          <span class="bar-val">$160.4K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Q3 (Jul–Sep)</span>
+          <div class="bar-track"><div class="bar-fill gold" style="width:100%"></div></div>
+          <span class="bar-val">$162.1K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Q4 (Oct–Dec)</span>
+          <div class="bar-track"><div class="bar-fill gold" style="width:96%"></div></div>
+          <span class="bar-val">$156.2K</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2 — PRODUCT PERFORMANCE -->
+<section class="page">
+  <div class="page-header">
+    <span class="page-num">02</span>
+    <h2 class="page-title">Product <em>Performance</em></h2>
+  </div>
+  <div class="two-col">
+    <div>
+      <p class="section-title">Top 5 products by revenue</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Smart Watch</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <span class="bar-val">$48.9K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Recliner Chair</span>
+          <div class="bar-track"><div class="bar-fill" style="width:98%"></div></div>
+          <span class="bar-val">$47.8K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Smart TV</span>
+          <div class="bar-track"><div class="bar-fill" style="width:96%"></div></div>
+          <span class="bar-val">$46.8K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Tablet</span>
+          <div class="bar-track"><div class="bar-fill" style="width:91%"></div></div>
+          <span class="bar-val">$44.3K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Bluetooth Speaker</span>
+          <div class="bar-track"><div class="bar-fill" style="width:76%"></div></div>
+          <span class="bar-val">$37.0K</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-title">Top 5 products by volume</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Card Game</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div>
+          <span class="bar-val">113 units</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Toy Train</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:75%"></div></div>
+          <span class="bar-val">85 units</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Pasta Pack</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:73%"></div></div>
+          <span class="bar-val">82 units</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Board Game</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:65%"></div></div>
+          <span class="bar-val">74 units</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Bookshelf</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:64%"></div></div>
+          <span class="bar-val">72 units</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 3rem;">
+    <p class="section-title">Revenue by category</p>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span class="bar-label">Electronics</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <span class="bar-val">$276.2K</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Home</span>
+        <div class="bar-track"><div class="bar-fill" style="width:83%"></div></div>
+        <span class="bar-val">$230.3K</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Toys</span>
+        <div class="bar-track"><div class="bar-fill" style="width:19%"></div></div>
+        <span class="bar-val">$53.3K</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Clothing</span>
+        <div class="bar-track"><div class="bar-fill" style="width:12%"></div></div>
+        <span class="bar-val">$33.1K</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Grocery</span>
+        <div class="bar-track"><div class="bar-fill" style="width:4%"></div></div>
+        <span class="bar-val">$9.8K</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3 — CUSTOMER & PAYMENTS -->
+<section class="page">
+  <div class="page-header">
+    <span class="page-num">03</span>
+    <h2 class="page-title">Customer <em>& Payments</em></h2>
+  </div>
+  <div class="findings">
+    <div class="finding">
+      <div>
+        <div class="finding-q">Top customer</div>
+        <div class="finding-label">Highest individual customer spend in 2024</div>
+      </div>
+      <div class="finding-answer">
+        <span class="finding-val">$20,165</span>
+        <span class="finding-sub">Single customer — highest lifetime spend on record</span>
+      </div>
+    </div>
+    <div class="finding">
+      <div>
+        <div class="finding-q">Payment methods</div>
+        <div class="finding-label">Leading payment method by total revenue generated</div>
+      </div>
+      <div class="finding-answer">
+        <span class="finding-val">Credit Card</span>
+        <span class="finding-sub">$162,672 total · highest avg transaction at $1,251</span>
+      </div>
+    </div>
+    <div class="finding">
+      <div>
+        <div class="finding-q">Regional payment preference</div>
+        <div class="finding-label">Preferred payment method differs across regions</div>
+      </div>
+      <div class="finding-answer">
+        <span class="finding-val" style="font-size:1.4rem; line-height:1.6">East & South: Cash<br>North: UPI<br>West: Credit Card</span>
+      </div>
+    </div>
+    <div class="finding">
+      <div>
+        <div class="finding-q">Customer value tiers</div>
+        <div class="finding-label">186 customers segmented by total annual spend</div>
+      </div>
+      <div class="finding-answer">
+        <span class="finding-val" style="font-size:1.1rem; line-height:2">
+          8 High spenders &nbsp;·&nbsp; ≥$10,000<br>
+          70 Mid spenders &nbsp;·&nbsp; $3,000–$10,000<br>
+          108 Low spenders &nbsp;·&nbsp; below $3,000
+        </span>
+        <span class="finding-sub">Only 4% of customers drive high-value spend — a key retention priority</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4 — STORE ANALYSIS -->
+<section class="page">
+  <div class="page-header">
+    <span class="page-num">04</span>
+    <h2 class="page-title">Store <em>Analysis</em></h2>
+  </div>
+  <div class="two-col">
+    <div>
+      <p class="section-title">Top 5 stores by revenue</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Store 2</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <span class="bar-val">$91.2K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 9</span>
+          <div class="bar-track"><div class="bar-fill" style="width:79%"></div></div>
+          <span class="bar-val">$72.3K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 10</span>
+          <div class="bar-track"><div class="bar-fill" style="width:52%"></div></div>
+          <span class="bar-val">$47.7K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 4</span>
+          <div class="bar-track"><div class="bar-fill" style="width:51%"></div></div>
+          <span class="bar-val">$47.0K</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 6</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:38%"></div></div>
+          <span class="bar-val">$35.1K</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-title">Return rate by store</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Store 6</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:100%"></div></div>
+          <span class="bar-val">18.0%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 10</span>
+          <div class="bar-track"><div class="bar-fill warm" style="width:97%"></div></div>
+          <span class="bar-val">17.4%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 9</span>
+          <div class="bar-track"><div class="bar-fill" style="width:57%"></div></div>
+          <span class="bar-val">10.2%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 2</span>
+          <div class="bar-track"><div class="bar-fill" style="width:54%"></div></div>
+          <span class="bar-val">9.7%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Store 1</span>
+          <div class="bar-track"><div class="bar-fill" style="width:46%"></div></div>
+          <span class="bar-val">8.3%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="findings" style="margin-top: 3rem;">
+    <div class="finding">
+      <div>
+        <div class="finding-q">Top performing store</div>
+        <div class="finding-label">Highest revenue store of the year</div>
+      </div>
+      <div class="finding-answer">
+        <span class="finding-val">Store 2</span>
+        <span class="finding-sub">$91,190 — ranked #1 in the North region</span>
+      </div>
+    </div>
+    <div class="finding">
+      <div>
+        <div class="finding-q">Highest quality transactions</div>
+        <div class="finding-label">Store with the highest average spend per visit</div>
+      </div>
+      <div class="finding-answer">
+        <span class="finding-val">Store 8</span>
+        <span class="finding-sub">$1,479 average per transaction</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5 — KEY INSIGHTS -->
+<section class="page">
+  <div class="page-header">
+    <span class="page-num">05</span>
+    <h2 class="page-title">Key <em>Insights</em></h2>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-label">Revenue leadership</div>
+      <h3>West region drives the business</h3>
+      <p>West generated $178K in revenue with an average order value of $1,286. It is the strongest region across both total revenue and transaction quality, and should be the benchmark for other regions.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">Category strength</div>
+      <h3>Electronics and Home account for 84% of revenue</h3>
+      <p>Together they generated $506K out of $602K total. Electronics has the highest average sale at $2,631 per transaction, making it the most valuable category to grow and protect.</p>
+    </div>
+    <div class="insight-card warn">
+      <div class="insight-label">Requires attention</div>
+      <h3>Store 6 is underperforming on both fronts</h3>
+      <p>Store 6 completed 215 transactions but generated only $35K in revenue, the lowest of all stores. It also has the highest return rate at 18%. Both issues together suggest something is wrong at this location and it needs investigation.</p>
+    </div>
+    <div class="insight-card gold">
+      <div class="insight-label">Seasonal opportunity</div>
+      <h3>December is the strongest month by far</h3>
+      <p>December generated $67.7K, more than double January's $28.3K. Q3 and Q4 are consistently the strongest periods. Planning inventory and staffing around this pattern could significantly improve efficiency.</p>
+    </div>
+    <div class="insight-card warn">
+      <div class="insight-label">Product quality flag</div>
+      <h3>Nearly one in three Bed Frames is returned</h3>
+      <p>The Bed Frame has a return rate of 30.8%, well above the company average of 9.8%. This level of returns is costly and suggests a product quality, description, or assembly problem that should be reviewed immediately.</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-label">Star product</div>
+      <h3>Smart Watch is the top revenue product</h3>
+      <p>The Smart Watch generated $48.9K in revenue and was the best selling product in two out of four regions. Keeping it well stocked and visible across all stores would have a direct impact on overall revenue.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BACK COVER -->
+<section class="back-cover">
+  <h2>Thank you</h2>
+  <a class="github-link" href="https://github.com/mahiljoarder" target="_blank">github.com/mahiljoarder</a>
+</section>
+
+</body>
+</html>

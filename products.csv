@@ -1,0 +1,51 @@
+Product_ID,Product_Name,Product_Category,Unit_Price
+P0001,Smart TV,Electronics,821.4
+P0002,Laptop,Electronics,176.26
+P0003,Wireless Headphones,Electronics,438.78
+P0004,Smartphone,Electronics,384.37
+P0005,Tablet,Electronics,923.29
+P0006,Bluetooth Speaker,Electronics,860.53
+P0007,Smart Watch,Electronics,1086.79
+P0008,Gaming Console,Electronics,241.29
+P0009,Camera,Electronics,593.02
+P0010,Monitor,Electronics,181.29
+P0011,Winter Jacket,Clothing,63.26
+P0012,Denim Jeans,Clothing,113.44
+P0013,Cotton T-Shirt,Clothing,29.64
+P0014,Sports Shoes,Clothing,59.8
+P0015,Formal Shirt,Clothing,138.73
+P0016,Summer Dress,Clothing,120.36
+P0017,Woolen Sweater,Clothing,63.58
+P0018,Running Shorts,Clothing,128.12
+P0019,Leather Belt,Clothing,166.65
+P0020,Sneakers,Clothing,26.14
+P0021,Sofa Set,Home,664.07
+P0022,Dining Table,Home,588.7
+P0023,Bed Frame,Home,338.18
+P0024,Wardrobe,Home,208.84
+P0025,Coffee Table,Home,770.05
+P0026,Bookshelf,Home,335.62
+P0027,Kitchen Cabinet,Home,164.92
+P0028,Study Desk,Home,167.7
+P0029,Recliner Chair,Home,693.25
+P0030,TV Stand,Home,522.61
+P0031,LEGO Set,Toys,99.75
+P0032,Remote Control Car,Toys,91.62
+P0033,Board Game,Toys,71.3
+P0034,Action Figure,Toys,117.18
+P0035,Puzzle Set,Toys,54.75
+P0036,Doll House,Toys,72.96
+P0037,Building Blocks,Toys,102.09
+P0038,Toy Train,Toys,79.94
+P0039,Stuffed Animal,Toys,105.48
+P0040,Card Game,Toys,75.62
+P0041,Organic Rice,Grocery,44.64
+P0042,Olive Oil,Grocery,10.38
+P0043,Coffee Beans,Grocery,19.85
+P0044,Protein Powder,Grocery,23.05
+P0045,Mixed Nuts,Grocery,12.15
+P0046,Herbal Tea,Grocery,20.11
+P0047,Pasta Pack,Grocery,13.25
+P0048,Honey Jar,Grocery,22.45
+P0049,Granola Mix,Grocery,41.06
+P0050,Spice Set,Grocery,26.97
