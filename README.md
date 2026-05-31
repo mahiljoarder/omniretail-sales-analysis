@@ -4,7 +4,7 @@ End-to-end data analytics project covering data cleaning, SQL analysis, and Powe
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores in 4 regions. This project analyzes 500 sales transactions across 50 products to uncover revenue trends, customer behavior, product performance, and store efficiency.
 
@@ -12,7 +12,7 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 
 ---
 
-## 🛠️ Tools Used
+## Tools Used
 
 | Tool | Purpose |
 |------|---------|
@@ -22,7 +22,7 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 
 ---
 
-## 📁 Project Files
+## Project Files
 
 | File | Description |
 |------|-------------|
@@ -36,7 +36,7 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 
 ---
 
-## 🧹 Data Cleaning
+## Data Cleaning
 
 ### Stage 1 — Excel Cleaning
 The raw data (`Sales_Data_Messy.xlsx`) had several issues:
@@ -59,7 +59,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 
 ---
 
-## 📊 SQL Analysis — 30 Questions
+## SQL Analysis — 30 Questions
 
 ### 🔵 Basic Analysis (Q1–Q10)
 | # | Question | Answer |
@@ -75,7 +75,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 | 9 | Avg unit price per category? | Electronics $555, Home $464, Clothing $87 |
 | 10 | Highest return % category? | **Home** — 12.4% |
 
-### 🟡 Intermediate Analysis (Q11–Q20)
+### Intermediate Analysis (Q11–Q20)
 | # | Question | Answer |
 |---|----------|--------|
 | 11 | Highest revenue product? | **Smart Watch** — $48,906 |
@@ -89,7 +89,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 | 19 | Highest return rate quarter? | **Q4** — 12.0% |
 | 20 | Unique customers per region? | West (97), South (96), North (92), East (89) |
 
-### 🔴 Advanced Analysis (Q21–Q30)
+### Advanced Analysis (Q21–Q30)
 | # | Question | Answer |
 |---|----------|--------|
 | 21 | Rank stores by revenue within region | S002 #1 in North ($36,492), S009 #1 in West ($31,576) |
@@ -105,7 +105,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 
 ---
 
-## 📈 Power BI Dashboard
+## Power BI Dashboard
 
 The dashboard has **5 pages:**
 
@@ -117,7 +117,7 @@ The dashboard has **5 pages:**
 
 ---
 
-## 💡 Key Business Insights
+## Key Business Insights
 
 - **West region dominates** with $178K revenue and highest avg order value ($1,286)
 - **Electronics is the premium category** with highest avg unit price ($555) and avg revenue per sale ($2,631)
@@ -129,7 +129,7 @@ The dashboard has **5 pages:**
 
 ---
 
-## 👤 Author
+## Author
 
 **Mahil Joarder**
 Data Analyst | SQL • Excel • Power BI
