@@ -61,7 +61,6 @@ set date_converted = date '1899-12-30' + sale_date::integer
 
 ## SQL Analysis — 30 Questions
 
-### 🔵 Basic Analysis (Q1–Q10)
 | # | Question | Answer |
 |---|----------|--------|
 | 1 | Highest revenue region? | **West** — $178,746 |
@@ -74,10 +73,6 @@ set date_converted = date '1899-12-30' + sale_date::integer
 | 8 | Highest sales quarter? | **Q3** — $162,068 |
 | 9 | Avg unit price per category? | Electronics $555, Home $464, Clothing $87 |
 | 10 | Highest return % category? | **Home** — 12.4% |
-
-### Intermediate Analysis (Q11–Q20)
-| # | Question | Answer |
-|---|----------|--------|
 | 11 | Highest revenue product? | **Smart Watch** — $48,906 |
 | 12 | Highest revenue month? | **December** — $67,724 |
 | 13 | Highest return rate store? | **S006** — 18.0% |
@@ -88,10 +83,6 @@ set date_converted = date '1899-12-30' + sale_date::integer
 | 18 | Top 5 by revenue? | Smart Watch, Recliner Chair, Smart TV, Tablet, Bluetooth Speaker |
 | 19 | Highest return rate quarter? | **Q4** — 12.0% |
 | 20 | Unique customers per region? | West (97), South (96), North (92), East (89) |
-
-### Advanced Analysis (Q21–Q30)
-| # | Question | Answer |
-|---|----------|--------|
 | 21 | Rank stores by revenue within region | S002 #1 in North ($36,492), S009 #1 in West ($31,576) |
 | 22 | Running total of revenue over time | Grew from $246 (Jan 1) to $602,639 (Dec 31) |
 | 23 | Month-over-month revenue growth | February saw biggest jump (+$36,343 vs January) |
