@@ -9,7 +9,6 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 
 **Total Revenue Analyzed: $602,640**
 
----
 
 ## Tools Used
 
@@ -19,7 +18,6 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 | PostgreSQL | Data loading, cleaning & analysis |
 | Power BI | Dashboard & visualization |
 
----
 
 ## Project Files
 
@@ -33,7 +31,6 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 | `data_cleaning_notes.md` | Full data cleaning walkthrough |
 | `omniretail_presentation.html` | Client-facing project presentation |
 
----
 
 ## Data Cleaning
 
@@ -56,7 +53,6 @@ update sales
 set date_converted = date '1899-12-30' + sale_date::integer
 ```
 
----
 
 ## SQL Analysis — 30 Questions
 
@@ -93,7 +89,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 | 29 | Best & worst quarter per region | West best in Q2 ($69,238), worst in Q1 ($20,959) |
 | 30 | Highest avg order value region? | **West** — $1,285.9 |
 
----
+
 
 ## Power BI Dashboard
 
@@ -105,7 +101,7 @@ The dashboard has **5 pages:**
 4. **Customer & Payments** — Customer segmentation, top 10 customers, payment analysis
 5. **Overview** — Executive summary combining key metrics
 
----
+
 
 ## Key Business Insights
 
@@ -117,7 +113,7 @@ The dashboard has **5 pages:**
 - **Only 8 out of 186 customers are high spenders** — a key retention opportunity
 - **Credit Card leads revenue** at $162.7K with the highest avg transaction value of $1,251
 
----
+
 
 ## Author
 
