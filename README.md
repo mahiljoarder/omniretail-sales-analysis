@@ -1,4 +1,4 @@
-# 🛒 OmniRetail Sales Analysis
+# OmniRetail Sales Analysis
 
 End-to-end data analytics project covering data cleaning, SQL analysis, and Power BI visualization on a simulated retail dataset.
 
