@@ -65,7 +65,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 | 5 | Lowest revenue, highest sales store? | **S006** - 215 sales, $35,099 revenue |
 | 6 | Payment method impact? | Credit Card leads at $162,672 |
 | 7 | Top 10 customers by spend? | C0145 leads at $20,165 |
-| 8 | Highest sales quarter? | **Q3** — $162,068 |
+| 8 | Highest sales quarter? | **Q3** - $162,068 |
 | 9 | Avg unit price per category? | Electronics $555, Home $464, Clothing $87 |
 | 10 | Highest return % category? | **Home** - 12.4% |
 | 11 | Highest revenue product? | **Smart Watch** - $48,906 |
