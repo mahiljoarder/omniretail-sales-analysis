@@ -34,14 +34,14 @@ OmniRetail Pvt. Ltd. is a multi-region retail company operating across 10 stores
 
 ## Data Cleaning
 
-### Stage 1 — Excel Cleaning
+### Stage 1 - Excel Cleaning
 The raw data (`Sales_Data_Messy.xlsx`) had several issues:
 -  Data stored in rows instead of columns (transposed layout)
 - Fields not properly structured for database import
 
 **Fix:** Restructured the entire dataset into proper tabular format where each row represents one transaction with 12 columns.
 
-### Stage 2 — SQL Cleaning
+### Stage 2 - SQL Cleaning
 After loading into PostgreSQL, a further issue was found:
 - `Sale_Date` stored as Excel serial numbers (e.g. `45394` instead of a real date)
 
@@ -54,7 +54,7 @@ set date_converted = date '1899-12-30' + sale_date::integer
 ```
 
 
-## SQL Analysis — 30 Questions
+## SQL Analysis - 30 Questions
 
 | # | Question | Answer |
 |---|----------|--------|
